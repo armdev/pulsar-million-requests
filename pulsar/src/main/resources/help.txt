@@ -1,0 +1,12 @@
+https://github.com/majusko/pulsar-java-spring-boot-starter
+https://github.com/apache/pulsar/blob/master/docker-compose/standalone-dashboard/docker-compose.yml
+https://github.com/lhotari/pulsar-log4j2-appender-demo
+
+http://localhost:3021/webjars/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config
+
+curl -X 'GET' \
+  'http://localhost:3021/api/v2/pulsars/send?message=1441' \
+  -H 'accept: */*
+
+
+ab -k -c 10 -n 100 http://localhost:3021/api/v2/pulsars/send?message=ping

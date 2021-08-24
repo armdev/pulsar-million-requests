@@ -1,0 +1,67 @@
+version: '3.3'
+
+services:
+
+  standalone:
+    image: apachepulsar/pulsar:2.8.0
+    container_name: standalone
+    ports:
+      - 8080
+      - 6650
+    environment:
+      - BOOKIE_MEM=" -Xms512m -Xmx512m -XX:MaxDirectMemorySize=1g"
+    command: >
+      /bin/bash -c
+      "bin/apply-config-from-env.py conf/standalone.conf
+      && bin/pulsar standalone --advertised-address standalone"      
+    networks:
+      local-pulsar-net:
+      
+  dashboard:
+    image: apachepulsar/pulsar-dashboard
+    container_name: dashboard
+    depends_on:
+      - standalone
+    ports:
+      - "9090:80"
+    environment:
+      - SERVICE_URL=http://standalone:8080
+    networks:
+      local-pulsar-net:
+  
+  pulsar:
+    image: pulsar
+    build: ./pulsar
+    container_name: pulsar
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    links:
+      - standalone   
+    depends_on: 
+      - standalone     
+    ports:
+      - '3021:3021'  
+    networks:
+      - local-pulsar-net
+      
+   
+  magnetar:
+    image: magnetar
+    build: ./magnetar
+    container_name: magnetar   
+    links:
+      - standalone   
+    depends_on: 
+      - standalone     
+    ports:
+      - '4021:4021'  
+    networks:
+      - local-pulsar-net
+
+networks:
+  local-pulsar-net:
