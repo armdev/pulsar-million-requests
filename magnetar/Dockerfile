@@ -5,7 +5,7 @@ RUN useradd -ms /bin/sh mphic2050 \
     && echo "root:Docker!" | chpasswd \
     && chown -R mphic2050 /opt/
 USER mphic2050
-ENTRYPOINT ["java", "-XX:+UseZGC", "-XX:MinHeapSize=512M", "-XX:InitialHeapSize=512M", "-XX:MaxHeapSize=1G", \
+ENTRYPOINT ["java", "-XX:+UseZGC", "-XX:MinHeapSize=2G", "-XX:InitialHeapSize=2G", "-XX:MaxHeapSize=8G", \
             "-XX:ParallelGCThreads=100", "-XX:ConcGCThreads=30", \
             "-XX:SoftRefLRUPolicyMSPerMB=0","-XX:ZCollectionInterval=30", "-XX:ZFragmentationLimit=10", \
             "-XX:MaxGCPauseMillis=5", "-XX:+UseCompressedClassPointers", "-XX:-UseCompressedOops", "-XX:ZUncommitDelay=30", \
