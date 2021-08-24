@@ -30,4 +30,10 @@ public class PulsarResource {
         
     }
     
+     @GetMapping("/send/json")
+    public String sendToPulsarToJson(){
+        
+        return pulseProducer.sendToPulseJson();
+    }
+    
 }
