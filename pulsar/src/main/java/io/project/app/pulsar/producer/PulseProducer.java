@@ -36,7 +36,7 @@ public class PulseProducer {
     
       public String sendToPulseJson() {
         try {
-            log.info("Sending json ");
+            log.info("Sending json ");            
             MessageId send = producer.send("pulse",json);
             return send.toString();
         } catch (PulsarClientException ex) {
