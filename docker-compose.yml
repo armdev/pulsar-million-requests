@@ -74,8 +74,7 @@ services:
     ports:
       - '3021:3021'  
     networks:
-      - local-pulsar-net
-      
+      - local-pulsar-net      
    
   magnetar:
     image: magnetar
@@ -87,6 +86,19 @@ services:
       - standalone     
     ports:
       - '4021:4021'  
+    networks:
+      - local-pulsar-net
+      
+  shine:
+    image: shine
+    build: ./shine
+    container_name: shine   
+    links:
+      - standalone   
+    depends_on: 
+      - standalone     
+    ports:
+      - '5021:5021'  
     networks:
       - local-pulsar-net
 
