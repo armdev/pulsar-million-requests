@@ -10,3 +10,6 @@ curl -X 'GET' \
 
 
 ab -k -c 10 -n 100 http://localhost:3021/api/v2/pulsars/send?message=ping
+
+
+ab -k -c 10 -n 100 http://localhost:3021/api/v2/pulsars/send/data/event

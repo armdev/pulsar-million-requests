@@ -21,10 +21,18 @@ public class ShineService {
     @Autowired
     private EventModelRepository eventModelRepository;
 
-    public EventModel save(EventModel eventModel) {      
+    public EventModel save(EventModel eventModel) {
         eventModel.setRecordDate(LocalDateTime.now());
         eventModel.setId(UUID.randomUUID());
+        return eventModelRepository.save(eventModel);
 
+    }
+
+    public EventModel saveFromStream(String event) {
+        EventModel eventModel = new EventModel();
+        eventModel.setRecordDate(LocalDateTime.now());
+        eventModel.setId(UUID.randomUUID());
+        eventModel.setEventName(event);
         return eventModelRepository.save(eventModel);
 
     }

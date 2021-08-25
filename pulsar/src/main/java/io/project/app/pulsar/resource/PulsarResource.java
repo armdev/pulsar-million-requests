@@ -6,11 +6,15 @@
 package io.project.app.pulsar.resource;
 
 import io.project.app.pulsar.producer.PulseProducer;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 
 /**
  *
@@ -19,21 +23,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v2/pulsars")
 public class PulsarResource {
-    
+
     @Autowired
     private PulseProducer pulseProducer;
-    
+
     @GetMapping("/send")
-    public String sendToPulsar(@RequestParam String message){
-        
+    public String sendToPulsar(@RequestParam String message) {
+
         return pulseProducer.sendToPulse(message);
-        
+
     }
-    
-     @GetMapping("/send/json")
-    public String sendToPulsarToJson(){
-        
+
+    @GetMapping("/send/json")
+    public String sendToPulsarToJson() {
+
         return pulseProducer.sendToPulseJson();
     }
-    
+
+    @GetMapping("/send/data/event")
+    public String send() {
+
+           pulseProducer.sendToPulseEventChannel();
+        return "sent";
+    }
+
 }

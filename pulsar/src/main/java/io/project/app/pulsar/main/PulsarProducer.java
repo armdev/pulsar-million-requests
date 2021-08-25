@@ -21,4 +21,10 @@ public class PulsarProducer {
         return new ProducerFactory()                
                 .addProducer("pulse", String.class);
     }
+    
+    @Bean
+    public ProducerFactory producerEventFactory() {
+        return new ProducerFactory()                
+                .addProducer("redline", String.class);
+    }
 }
