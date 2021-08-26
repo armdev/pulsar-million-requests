@@ -6,6 +6,7 @@
 package io.project.app.shine.repositories;
 
 import io.project.app.shine.domain.EventModel;
+import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -16,5 +17,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface EventModelRepository extends CrudRepository<EventModel, UUID>{
+    
+    Optional<EventModel> findFirst1ByEventName(String name);
     
 }

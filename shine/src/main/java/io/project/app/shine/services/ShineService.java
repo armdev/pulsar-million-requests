@@ -9,6 +9,7 @@ import io.project.app.shine.domain.EventModel;
 import io.project.app.shine.repositories.EventModelRepository;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,13 @@ public class ShineService {
         eventModel.setId(UUID.randomUUID());
         eventModel.setEventName(event);
         return eventModelRepository.save(eventModel);
+
+    }
+    
+    
+    public Optional<EventModel> findByEventName(String name) {
+
+        return eventModelRepository.findFirst1ByEventName(name);
 
     }
 
