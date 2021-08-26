@@ -38,6 +38,9 @@ services:
     - 7199:7199
     - 9042:9042
     - 9160:9160
+    volumes:
+      - ~/volumes/cass1:/var/lib/cassandra    # This is the volume that will persist data for cass1 node
+      #- ~/volumes/etc/cass1:/etc/cassandra   # Use your own config files for full control
     networks:
       local-pulsar-net:
           
@@ -68,9 +71,11 @@ services:
         max_attempts: 3
         window: 120s
     links:
-      - standalone   
+      - standalone
+      - cassandra
     depends_on: 
-      - standalone     
+      - standalone
+      - cassandra
     ports:
       - '3021:3021'  
     networks:
@@ -81,9 +86,11 @@ services:
     build: ./magnetar
     container_name: magnetar   
     links:
-      - standalone   
+      - standalone
+      - cassandra
     depends_on: 
-      - standalone     
+      - standalone
+      - cassandra
     ports:
       - '4021:4021'  
     networks:
@@ -94,9 +101,11 @@ services:
     build: ./shine
     container_name: shine   
     links:
-      - standalone   
+      - standalone
+      - cassandra
     depends_on: 
-      - standalone     
+      - standalone
+      - cassandra
     ports:
       - '5021:5021'  
     networks:
