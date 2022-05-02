@@ -30,7 +30,7 @@ services:
       local-pulsar-net:
           
   cassandra:
-    image: cassandra:3.11.4
+    image: cassandra:latest
     container_name: cassandra   
     ports:
     - 7000:7000
@@ -39,7 +39,7 @@ services:
     - 9042:9042
     - 9160:9160
     volumes:
-      - ~/volumes/cass1:/var/lib/cassandra    # This is the volume that will persist data for cass1 node
+      - ~/volumes/cass4:/var/lib/cassandra    # This is the volume that will persist data for cass1 node
       #- ~/volumes/etc/cass1:/etc/cassandra   # Use your own config files for full control
     networks:
       local-pulsar-net:
@@ -50,7 +50,11 @@ services:
     depends_on:
     - cassandra
     environment:
-      CASSANDRA_HOST_IPS: 192.168.0.1
+      #CASSANDRA_HOST_IPS: 10.20.0.168
+      #192.168.80.2
+      #from docker inspect
+      CASSANDRA_HOST_IPS: 192.168.96.1
+     # CASSANDRA_HOST_IPS: 192.168.0.1
       CASSANDRA_PORT: 9042
       CASSANDRA_USER: cassandra
       CASSANDRA_PASSWORD: cassandra

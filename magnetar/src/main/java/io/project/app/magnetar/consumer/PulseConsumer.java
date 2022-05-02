@@ -16,10 +16,13 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 public class PulseConsumer {
+    
 
     @PulsarConsumer(topic = "pulse", clazz = String.class)
     void consume(String msg) {
         log.info("Received " + msg);
+        
+     
 
     }
 }
