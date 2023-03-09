@@ -27,6 +27,9 @@ public class PulseProducer {
     private PulsarTemplate<String> producer;
 
     @Autowired
+    private PulsarTemplate<String> producerExample;
+
+    @Autowired
     private PulsarTemplate<String> producerEventFactory;
 
     public String sendToPulseEventChannel() {
@@ -44,6 +47,17 @@ public class PulseProducer {
                 return "Not Send";
             }
             MessageId send = producerEventFactory.send("redline", event);
+            return send.toString();
+        } catch (PulsarClientException ex) {
+            log.error("error during sending " + ex.getLocalizedMessage());
+        }
+        return "No Id";
+    }
+
+    public String ping() {
+        try {
+
+            MessageId send = producerExample.send("example-string-topic", "ms" + "-" + System.currentTimeMillis());
             return send.toString();
         } catch (PulsarClientException ex) {
             log.error("error during sending " + ex.getLocalizedMessage());

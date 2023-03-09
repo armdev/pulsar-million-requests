@@ -27,4 +27,10 @@ public class PulsarProducer {
         return new ProducerFactory()                
                 .addProducer("redline", String.class);
     }
+    
+     @Bean
+    public ProducerFactory producerExample() {
+        return new ProducerFactory()                
+                .addProducer("example-string-topic", String.class);
+    }
 }

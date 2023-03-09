@@ -29,6 +29,22 @@ services:
     networks:
       local-pulsar-net:
           
+          
+  pulsar-manager:
+    image: apachepulsar/pulsar-manager:v0.2.0
+    container_name: pulsar-manager  
+    ports:
+      - "9527:9527"
+      - "7750:7750"
+    depends_on:
+      - standalone
+    links:
+      - standalone
+    environment:
+      SPRING_CONFIGURATION_FILE: /pulsar-manager/pulsar-manager/application.properties
+    networks:
+      local-pulsar-net:
+          
   cassandra:
     image: cassandra:latest
     container_name: cassandra   
@@ -53,7 +69,8 @@ services:
       #CASSANDRA_HOST_IPS: 10.20.0.168
       #192.168.80.2
       #from docker inspect
-      CASSANDRA_HOST_IPS: 192.168.96.1
+      CASSANDRA_HOST_IPS: 10.20.2.65 
+      #192.168.96.1
      # CASSANDRA_HOST_IPS: 192.168.0.1
       CASSANDRA_PORT: 9042
       CASSANDRA_USER: cassandra

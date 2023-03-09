@@ -35,18 +35,15 @@ public class ShineService {
         eventModel.setId(UUID.randomUUID());
         eventModel.setEventName(event);
         return eventModelRepository.save(eventModel);
-
     }
     
     
     public Optional<EventModel> findByEventName(String name) {
-
         return eventModelRepository.findFirst1ByEventName(name);
 
     }
 
     public List<EventModel> findAll() {
-
         return (List<EventModel>) eventModelRepository.findAll();
 
     }

@@ -18,3 +18,6 @@ Cassandra Swagger API
 http://localhost:5021/webjars/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config
 
 5. ab -k -c 10 -n 100 http://localhost:3021/api/v2/pulsars/send/data/event //send to shine/cassandra
+
+
+docker-compose up -d --build --scale magnetar=2
